@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\angry.png" />
+    <None Remove="images\cloudy.png" />
+    <None Remove="images\cry.png" />
+    <None Remove="images\happy.png" />
+    <None Remove="images\littleCloudy.png" />
+    <None Remove="images\love.png" />
+    <None Remove="images\rain.png" />
+    <None Remove="images\sad.png" />
+    <None Remove="images\snow.png" />
+    <None Remove="images\sunny.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\angry.png" />
+    <Resource Include="images\cloudy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\cry.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\happy.png" />
+    <Resource Include="images\littleCloudy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\love.png" />
+    <Resource Include="images\rain.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\sad.png" />
+    <Resource Include="images\snow.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\sunny.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="MySql.Data" Version="9.1.0" />
+  </ItemGroup>
+
+</Project>
