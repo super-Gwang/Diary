@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\user\source\repos\DiaryApp\obj\Debug\net8.0-windows\
-DiaryApp
+C:\workspace\Diary\Diary\obj\Debug\net8.0-windows\
+DiaryApp_prw2oj13_wpftmp
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\user\source\repos\DiaryApp\App.xaml
+TRACE;RELEASE;NET;NET8_0;NETCOREAPP
+C:\workspace\Diary\Diary\App.xaml
 31154088074
 
-14-1352512259
-208-90483463
+22-1613977609
+416-1818866606
 Views\MainWindow.xaml;Views\Popup\CalendarPopup.xaml;Views\Popup\CustomDayButton.xaml;
 
-False
+True
 

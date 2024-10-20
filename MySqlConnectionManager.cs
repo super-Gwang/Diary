@@ -13,7 +13,7 @@ public class MySqlConnectionManager
 
     public MySqlConnectionManager()
     {
-        connectionString = $"Server=localhost;Database=diarydb;User ID=root;Password=1234;";
+        connectionString = $"Server=localhost;Database=diary;User ID=root;Password=1234;";
     }
 
     public string ConnectionString => connectionString;
@@ -36,7 +36,6 @@ public class MySqlConnectionManager
                 }
             }
         }
-
         return results;
     }
 

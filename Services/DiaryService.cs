@@ -13,7 +13,6 @@ namespace DiaryApp.Service;
 public class DiaryService : IDatabase<Diary>
 {
     private MySqlConnectionManager dbManager;
-    private List<Diary> diaryEntries = new List<Diary>();
 
     public DiaryService()
     {
@@ -22,7 +21,7 @@ public class DiaryService : IDatabase<Diary>
 
     public void Create(Diary entity)
     {
-        string query = @"INSERT INTO diaries (Date, Weather, Emotion, Title, Content) 
+        string query = @"INSERT INTO tb_diary (Date, Weather, Emotion, Title, Content) 
                          VALUES (@Date, @Weather, @Emotion, @Title, @Content)";
 
         var parameters = new Dictionary<string, object>
@@ -35,7 +34,6 @@ public class DiaryService : IDatabase<Diary>
         };
 
         dbManager.ExecuteNonQuery(query, parameters);
-        //diaryEntries.Add(entity); 
     }
 
     public void Delete(int? id)
@@ -44,7 +42,7 @@ public class DiaryService : IDatabase<Diary>
 
     public List<Diary>? Get()
     {
-        string query = "SELECT * FROM diaries";
+        string query = "SELECT * FROM tb_diary";
         return dbManager.ExecuteReader(query, reader => new Diary
         {
             Id = reader.GetInt32("Id"),
@@ -54,13 +52,12 @@ public class DiaryService : IDatabase<Diary>
             Title = reader.GetString("Title"),
             Content = reader.GetString("Content")
         });
-        //return diaryEntries;
     }
 
     public Diary? GetDetail(int? id)
     {
         if (id == null) return null;
-        string query = "SELECT * FROM diaries WHERE Id = @Id";
+        string query = "SELECT * FROM tb_diary WHERE Id = @Id";
 
         var parameters = new Dictionary<string, object>
         {
@@ -76,9 +73,7 @@ public class DiaryService : IDatabase<Diary>
             Title = reader.GetString("Title"),
             Content = reader.GetString("Content")
         });
-
-        return result.FirstOrDefault();  // 하나의 Diary 반환, 없으면 null
-        //return diaryEntries.FirstOrDefault(e => e.Id == id);
+        return result.FirstOrDefault();
     }
 
     public void Update(Diary entity)
