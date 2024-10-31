@@ -19,6 +19,7 @@
     <None Remove="images\sad.png" />
     <None Remove="images\snow.png" />
     <None Remove="images\sunny.png" />
+    <None Remove="images\test.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +45,7 @@
     <Resource Include="images\sunny.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="images\test.gif" />
   </ItemGroup>
 
   <ItemGroup>

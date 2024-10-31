@@ -14,19 +14,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DiaryApp.Views.Popup;
 public partial class CustomDayButton : UserControl
 {
-    public string Day;
+    private DateTime day;
+    public DateTime Day
+    {
+        get { return day; }
+        set
+        {
+            if (day != value)
+            {
+                day = value;
+                DayText.Text = day.Day.ToString();
+            }
+        }
+    }
+    public event Action<DateTime> DaySelected;
     public CustomDayButton()
     {
         InitializeComponent();
     }
 
-    public void SetDay(int day)
+    public void SetDay(DateTime day)
     {
-        DayText.Text = day.ToString();
+        Day = day;
         //Visibility = Visibility.Visible;
     }
     public void Hide()
@@ -58,5 +72,10 @@ public partial class CustomDayButton : UserControl
 
         // 이미지 경로를 BitmapImage로 변환하여 Source에 설정
         DayImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+    }
+
+    private void DayButton_Click(object sender, RoutedEventArgs e)
+    {
+        DaySelected?.Invoke(Day);
     }
 }

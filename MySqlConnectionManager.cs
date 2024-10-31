@@ -18,7 +18,7 @@ public class MySqlConnectionManager
 
     public string ConnectionString => connectionString;
 
-    public List<T> ExecuteReader<T>(string query, Func<MySqlDataReader, T> mapFunction)
+    public List<T> ExecuteReader<T>(string query, Func<MySqlDataReader, T> mapFunction, Dictionary<string, object>? parameters = null)
     {
         var results = new List<T>();
 
@@ -27,6 +27,13 @@ public class MySqlConnectionManager
             connection.Open();
             using (var command = new MySqlCommand(query, connection))
             {
+                if (parameters != null)
+                {
+                    foreach (var param in parameters)
+                    {
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+                }
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())

@@ -25,5 +25,6 @@ public partial class CalendarPopup : Window
     {
         InitializeComponent();
         this.DataContext = viewModel;
+        viewModel.ClosePopupAction = new Action(() => { this.Close();});
     }
 }

@@ -83,3 +83,4 @@ C:\workspace\Diary\Diary\obj\Debug\net8.0-windows\DiaryApp.sourcelink.json
 C:\workspace\Diary\Diary\obj\Debug\net8.0-windows\DiaryApp.csproj.Up2Date
 C:\workspace\Diary\Diary\obj\Debug\net8.0-windows\DiaryApp.genruntimeconfig.cache
 C:\workspace\Diary\Diary\obj\Debug\net8.0-windows\ref\DiaryApp.dll
+C:\Users\user\source\repos\DiaryApp\obj\Debug\net8.0-windows\DiaryApp.sourcelink.json

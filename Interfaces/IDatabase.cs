@@ -12,9 +12,11 @@ public interface IDatabase<T>
 
     T? GetDetail(int? id);
 
-    void Create(T entity);
+    T? GetDetail(DateTime date);
 
-    void Update(T entity);
+    int Create(T entity);
+
+    int Update(T entity);
 
     void Delete(int? id);
 }

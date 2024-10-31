@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\workspace\Diary\Diary\obj\Debug\net8.0-windows\
+C:\Users\user\source\repos\DiaryApp\obj\Debug\net8.0-windows\
 DiaryApp
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\workspace\Diary\Diary\App.xaml
+C:\Users\user\source\repos\DiaryApp\App.xaml
 31154088074
 
 19-225167205
-2081238050345
+208-90483463
 Views\MainWindow.xaml;Views\Popup\CalendarPopup.xaml;Views\Popup\CustomDayButton.xaml;
 
-False
+True
 

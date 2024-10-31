@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -16,6 +18,12 @@ namespace DiaryApp.ViewModels;
 public class CalendarViewModel : INotifyPropertyChanged
 {
     private readonly IDatabase<Diary?> _database;
+    private readonly IDialogService _dialogService;
+
+    private readonly MainViewModel _mainViewModel;
+
+    public Action ClosePopupAction { get; set; }
+    public event Action<DateTime> DaySelected;
 
     private DateTime _currentDate;
     public DateTime CurrentDate
@@ -50,10 +58,14 @@ public class CalendarViewModel : INotifyPropertyChanged
     public ObservableCollection<CustomDayButton> DayButtons { get; set; }
     public ICommand PreviousMonthCommand { get; set; }
     public ICommand NextMonthCommand { get; set; }
+    public ICommand TestCommand { get; set; }
 
-    public CalendarViewModel(IDatabase<Diary?> database)
+    public CalendarViewModel(IDatabase<Diary?> database, IDialogService dialogService, MainViewModel mainViewModel)
     {
         _database = database;
+        _dialogService = dialogService;
+
+        _mainViewModel = mainViewModel;
         DayButtons = new ObservableCollection<CustomDayButton>();
 
         CurrentDate = DateTime.Today;
@@ -97,7 +109,8 @@ public class CalendarViewModel : INotifyPropertyChanged
         for (int day = 1; day <= daysInMonth; day++)
         {
             CustomDayButton dayButton = new CustomDayButton();
-            dayButton.SetDay(day);
+            dayButton.SetDay(new DateTime(CurrentDate.Year, CurrentDate.Month, day));
+            dayButton.DaySelected += OnDaySelected;
 
             var diaryForDay = currentMonthDiaries.FirstOrDefault(d => d.Date.Day == day);
 
@@ -106,6 +119,12 @@ public class CalendarViewModel : INotifyPropertyChanged
 
             DayButtons.Add(dayButton);
         }
+    }
+
+    public void OnDaySelected(DateTime param)
+    {
+        DaySelected?.Invoke(param);
+        ClosePopupAction?.Invoke();
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

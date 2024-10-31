@@ -19,7 +19,7 @@ public class DiaryService : IDatabase<Diary>
         dbManager = new MySqlConnectionManager();
     }
 
-    public void Create(Diary entity)
+    public int Create(Diary entity)
     {
         string query = @"INSERT INTO tb_diary (Date, Weather, Emotion, Title, Content) 
                          VALUES (@Date, @Weather, @Emotion, @Title, @Content)";
@@ -33,7 +33,8 @@ public class DiaryService : IDatabase<Diary>
             { "@Content", entity.Content }
         };
 
-        dbManager.ExecuteNonQuery(query, parameters);
+        int attectedRows = dbManager.ExecuteNonQuery(query, parameters);
+        return attectedRows;
     }
 
     public void Delete(int? id)
@@ -72,11 +73,34 @@ public class DiaryService : IDatabase<Diary>
             Emotion = reader.GetString("Emotion"),
             Title = reader.GetString("Title"),
             Content = reader.GetString("Content")
-        });
+        }, parameters);
         return result.FirstOrDefault();
     }
 
-    public void Update(Diary entity)
+    public Diary? GetDetail(DateTime date)
+    {
+        if (date == null) return null;
+
+        string query = "SELECT * FROM tb_diary WHERE Date = @Date";
+
+        var parameters = new Dictionary<string, object>
+        {
+            { "@Date", date.ToString("yyyy-MM-dd") }
+        };
+
+        var result = dbManager.ExecuteReader(query, reader => new Diary
+        {
+            Id = reader.GetInt32("Id"),
+            Date = reader.GetDateTime("Date"),
+            Weather = reader.GetString("Weather"),
+            Emotion = reader.GetString("Emotion"),
+            Title = reader.GetString("Title"),
+            Content = reader.GetString("Content")
+        }, parameters);
+        return result.FirstOrDefault();
+    }
+
+    public int Update(Diary entity)
     {
         var existingDiary = GetDetail(entity.Id);
         if (existingDiary != null)
@@ -85,6 +109,23 @@ public class DiaryService : IDatabase<Diary>
             existingDiary.Emotion = entity.Emotion;
             existingDiary.Title = entity.Title;
             existingDiary.Content = entity.Content;
+
+            string query = @"UPDATE tb_diary 
+                         SET Weather = @Weather, Emotion = @Emotion, Title = @Title, Content = @Content 
+                         WHERE Id = @Id";
+
+            var parameters = new Dictionary<string, object>
+        {
+            { "@Weather", existingDiary.Weather },
+            { "@Emotion", existingDiary.Emotion },
+            { "@Title", existingDiary.Title },
+            { "@Content", existingDiary.Content },
+            { "@Id", existingDiary.Id }
+        };
+
+            int affectedRows = dbManager.ExecuteNonQuery(query, parameters);
+            return affectedRows;
         }
+        return 0; // 일기가 존재하지 않으면 0 반환
     }
 }

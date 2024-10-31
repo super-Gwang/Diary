@@ -11,9 +11,10 @@ namespace DiaryApp.Services;
 public class DiaryMemoryService : IDatabase<Diary>
 {
     private readonly List<Diary> _diaryList = new List<Diary>();
-    public void Create(Diary entity)
+    public int Create(Diary entity)
     {
         _diaryList.Add(entity);
+        return 1;
     }
 
     public void Delete(int? id)
@@ -34,7 +35,15 @@ public class DiaryMemoryService : IDatabase<Diary>
         return diary;
     }
 
-    public void Update(Diary entity)
+    public Diary? GetDetail(DateTime date)
+    {
+        Diary? diary = null;
+        diary = _diaryList.FirstOrDefault(d => d.Date == date);
+
+        return diary;
+    }
+
+    public int Update(Diary entity)
     {
         Diary? diary = GetDetail(entity.Id);
         if (diary == null)
@@ -44,5 +53,7 @@ public class DiaryMemoryService : IDatabase<Diary>
             diary.Weather = entity.Weather;
             diary.Emotion = entity.Emotion;
         }
+
+        return 1;
     }
 }

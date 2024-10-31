@@ -7,7 +7,47 @@
         mc:Ignorable="d"
         AllowsTransparency="True" Background="Transparent" WindowStyle="None"
         Title="MainWindow" Height="700" Width="550">
-    
+    <Window.Resources>
+        <Style x:Key="SaveBtnStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFF3C74C"/>
+            <Setter Property="BorderBrush" Value="#FFFFA941" />
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center" 
+                                      RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="ToggleButton">
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="7 0" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+        </Style>
+    </Window.Resources>
+
     <Border BorderBrush="Gray" BorderThickness="2" CornerRadius="20" Background="White">
         <Grid>
             <Grid.RowDefinitions>
@@ -22,7 +62,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <Button Background="Transparent" Command="{Binding PopupCommand}"/>
+                        <Button Background="Transparent" Command="{Binding PopupCommand}" BorderThickness="0 0 2 0"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock x:Name="tbYear" Text="{Binding SelectYear}" FontSize="25" Margin="10 0 0 0" FontWeight="Bold"/>
                             <TextBlock Text="년" FontSize="25" FontWeight="Bold"/>
@@ -33,42 +73,47 @@
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="1">
-                        <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding WeatherCommand}" CommandParameter="맑음"
-                                Width="40" Height="40" Margin="5" Name="SunnyBtn" BorderThickness="0">
-                                <Button.Background>
-                                    <SolidColorBrush Color="#00FFFFFF"/>
-                                </Button.Background>
-                                <Image Source="/images/sunny.png" Width="30" Height="30" />
-                            </Button>
-                            <Button Command="{Binding WeatherCommand}" CommandParameter="조금 흐림"
-                                Width="40" Height="40" Margin="5" Name="littleCloudyBtn" BorderThickness="0">
-                                <Button.Background>
-                                    <SolidColorBrush Color="#00FFFFFF"/>
-                                </Button.Background>
-                                <Image Source="/images/littleCloudy.png" Width="30" Height="30"/>
-                            </Button>
-                            <Button Command="{Binding WeatherCommand}" CommandParameter="흐림"
-                                Width="40" Height="40" Margin="5" Name="CloudyBtn" BorderThickness="0">
-                                <Button.Background>
-                                    <SolidColorBrush Color="#00FFFFFF"/>
-                                </Button.Background>
-                                <Image Source="/images/cloudy.png" Width="30" Height="30"/>
-                            </Button>
-                            <Button Command="{Binding WeatherCommand}" CommandParameter="비"
-                                Width="40" Height="40" Margin="5" Name="RainBtn" BorderThickness="0">
-                                <Button.Background>
-                                    <SolidColorBrush Color="#00FFFFFF"/>
-                                </Button.Background>
-                                <Image Source="/images/rain.png" Width="30" Height="30"/>
-                            </Button>
-                            <Button Command="{Binding WeatherCommand}" CommandParameter="눈"
-                                Width="40" Height="40" Margin="5" Name="SnowBtn" BorderThickness="0">
-                                <Button.Background>
-                                    <SolidColorBrush Color="#00FFFFFF"/>
-                                </Button.Background>
-                                <Image Source="/images/snow.png" Width="30" Height="30"/>
-                            </Button>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <ToggleButton Command="{Binding WeatherCommand}"
+                                    CommandParameter="맑음" 
+                                    x:Name="SunnyBtn"
+                                    Checked="ToggleBtn_Checked">
+                                <ToggleButton.Background>
+                                    <ImageBrush ImageSource="/images/sunny.png"/>
+                                </ToggleButton.Background>
+                            </ToggleButton>
+                            <ToggleButton Command="{Binding WeatherCommand}"
+                                    CommandParameter="조금 흐림"
+                                    x:Name="littleCloudyBtn"
+                                    Checked="ToggleBtn_Checked">
+                                <ToggleButton.Background>
+                                    <ImageBrush ImageSource="/images/littleCloudy.png"/>
+                                </ToggleButton.Background>
+                            </ToggleButton>
+                            <ToggleButton Command="{Binding WeatherCommand}"
+                                    CommandParameter="흐림"
+                                    x:Name="CloudyBtn"
+                                    Checked="ToggleBtn_Checked">
+                                <ToggleButton.Background>
+                                    <ImageBrush ImageSource="/images/cloudy.png"/>
+                                </ToggleButton.Background>
+                            </ToggleButton>
+                            <ToggleButton Command="{Binding WeatherCommand}" 
+                                    CommandParameter="비"
+                                    x:Name="RainBtn"
+                                    Checked="ToggleBtn_Checked">
+                                <ToggleButton.Background>
+                                    <ImageBrush ImageSource="/images/rain.png"/>
+                                </ToggleButton.Background>
+                            </ToggleButton>
+                            <ToggleButton Command="{Binding WeatherCommand}"
+                                    CommandParameter="눈" 
+                                    x:Name="SnowBtn"
+                                    Checked="ToggleBtn_Checked">
+                                <ToggleButton.Background>
+                                    <ImageBrush ImageSource="/images/snow.png"/>
+                                </ToggleButton.Background>
+                            </ToggleButton>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -89,7 +134,7 @@
                             <Button.Background>
                                 <SolidColorBrush Color="#00FFFFFF"/>
                             </Button.Background>
-                            <Image x:Name="EmotionImg" Source="/images/happy.png" Width="30" Height="30" />
+                            <Image x:Name="EmotionImg" Source="{Binding EmotionImageSource}" Width="30" Height="30" />
                         </Button>
                         <Popup x:Name="EmotionPopup" StaysOpen="False" Placement="Right" PlacementTarget="{Binding ElementName=EmotionButton}">
                             <Border Background="White" BorderBrush="Gray" BorderThickness="1" Padding="5">
@@ -119,14 +164,26 @@
                         </Popup>
                     </StackPanel>
                     <Grid Grid.Column="1">
-                        <Button Content="Save" Command="{Binding SaveCommand}" FontSize="15" FontWeight="Bold" 
-                                HorizontalAlignment="Right" Margin="0 0 10 0" Width="50" Height="30"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                            <Button x:Name="btn_Save" Content="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding SaveButtonEnabled}"
+                            FontSize="15" FontWeight="Bold" Style="{StaticResource SaveBtnStyle}"
+                            HorizontalAlignment="Right" Margin="0 0 10 0" Width="50" Height="30"/>
+                            <Button Content="Exit" FontSize="15" FontWeight="Bold" Width="50" Height="30"
+                                    Style="{StaticResource SaveBtnStyle}" Click="CloseApplication"/>
+                        </StackPanel>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Title}" FontSize="25" FontWeight="Bold"/>
-                    </StackPanel>
+                <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0 0 0 5">
+                        <TextBlock Text="제목:" FontSize="20" FontWeight="Bold"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Width="450" Margin="10 0 0 0">
+                        <TextBox Text="{Binding Title}" FontSize="20" FontWeight="Bold" BorderThickness="0 0 0 2"/>
+                    </Grid>
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">

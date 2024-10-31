@@ -42,7 +42,7 @@ public partial class App : Application
 
         services.AddSingleton<MainWindow>();
         services.AddSingleton<MainViewModel>();
-        services.AddSingleton<CalendarPopup>();
+        //services.AddSingleton<CalendarPopup>();
         services.AddSingleton<CalendarViewModel>();
         services.AddSingleton<CustomDayButton>();
     }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DiaryApp.Views.Popup"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="50">
-    <Button x:Name="DayButton" Width="50" Height="50" Background="White">
+    <Button x:Name="DayButton" Width="50" Height="50" Background="White" Click="DayButton_Click">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Height="40">
             <TextBlock x:Name="DayText" Text="1" HorizontalAlignment="Center" FontWeight="Bold" />
             <Image x:Name="DayImage" Width="20" Height="20" Margin="3" HorizontalAlignment="Center" Visibility="Visible"/>
